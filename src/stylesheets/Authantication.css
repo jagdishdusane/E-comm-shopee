@@ -1,0 +1,99 @@
+.form-control {
+     box-shadow: none;
+}
+
+.form-control:focus {
+     margin-top: 15px !important;
+     box-shadow: none !important;
+
+}
+
+input,
+textarea {
+     margin-top: 15px !important;
+}
+
+.radio-btn {
+     margin-left: 1rem;
+}
+
+.signup-form {
+     background-color: #fff;
+     padding: 20px;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
+.signup-parent {
+     height: 100vh;
+     background-color: aliceblue;
+     overflow: hidden;
+
+}
+
+.signup-parent .row {
+     height: 100vh;
+     align-items: center;
+}
+
+.signup-top {
+     height: 50%;
+     position: absolute;
+     left: 0;
+     right: 0;
+     top: 0;
+     background-color: #003F5C;
+
+}
+
+.z1 {
+     z-index: 1 !important;
+}
+
+.radio-btn {
+     margin-left: 1rem;
+}
+
+
+
+.login-form {
+     background-color: #fff;
+     padding: 20px;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
+.login-parent {
+     height: 100vh;
+     background-color: aliceblue;
+     overflow: hidden;
+
+}
+
+.login-parent .row {
+     height: 100vh;
+     align-items: center;
+}
+
+.login-bottom {
+     height: 50%;
+     position: absolute;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background-color: #003F5C;
+
+}
+
+.z1 {
+     z-index: 1 !important;
+}
+
+a {
+     text-decoration: none;
+}
+
+.button-62.disabled {
+     opacity: 0.6 !important;
+     cursor: not-allowed !important;
+}
