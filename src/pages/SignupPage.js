@@ -21,7 +21,9 @@ const SignupPage = () => {
 
   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   var letters = /^[A-z ]+$/;
-  var pattern = /^d{10}$/;
+  var strongRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+  );
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -85,6 +87,12 @@ const SignupPage = () => {
     }
     if (!mailformat.test(enterEmailId)) {
       toast.error("Enter valid email");
+      return 0;
+    }
+    if (!strongRegex.test(enterPassword)) {
+      toast.error(
+        "Password must be eight characters or longer.Password must be combination of [a-z][A-Z][0-9][!@#$%^&*]"
+      );
       return 0;
     }
     if (enterPassword !== enterConfirmPassword) {
