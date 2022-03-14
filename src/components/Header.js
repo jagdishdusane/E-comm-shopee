@@ -1,13 +1,10 @@
-import { React, useState, useEffect } from "react";
-import { collection, addDoc, getDocs } from "firebase/firestore";
-import { doc, deleteDoc } from "firebase/firestore";
-import fireDB from "../fireConfig";
+import { React } from "react";
+
 import { useSelector } from "react-redux";
 import { FaUser } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import { async } from "@firebase/util";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {

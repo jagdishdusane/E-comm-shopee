@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import Layout from "../components/Layout";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import fireDB from "../fireConfig";
 
 const OrderPage = () => {
@@ -20,14 +20,14 @@ const OrderPage = () => {
         ordersArray.push(doc.data());
         setLoading(false);
       });
-      console.log(ordersArray);
+
       setOrders(ordersArray);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   }
-  console.log(orders.length);
+
   return (
     <Layout loading={loading}>
       <div className="p-2">

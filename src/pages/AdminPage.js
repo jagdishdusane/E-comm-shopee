@@ -4,18 +4,19 @@ import {
   collection,
   addDoc,
   getDocs,
-  updateDoc,
   setDoc,
   doc,
   deleteDoc,
 } from "firebase/firestore";
 import { Modal } from "react-bootstrap";
 import fireDB from "../fireConfig";
-import { async } from "@firebase/util";
+
 import { toast } from "react-toastify";
+import AdminHeader from "../components/admin/AdminHeader";
+import AdminLayout from "../components/admin/AdminLayout";
 const AdminPage = () => {
   const [products, setProducts] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [product, setProduct] = useState({
     name: "",
@@ -37,7 +38,7 @@ const AdminPage = () => {
 
   async function getData() {
     try {
-      // setLoading(true);
+      setLoading(true);
 
       const users = await getDocs(collection(fireDB, "products"));
       const productsArray = [];
@@ -48,12 +49,12 @@ const AdminPage = () => {
           ...doc.data(),
         };
         productsArray.push(obj);
-        // setLoading(false);
+        setLoading(false);
       });
       setProducts(productsArray);
     } catch (error) {
       console.log(error);
-      // setLoading(false);
+      setLoading(false);
     }
   }
 
@@ -75,12 +76,14 @@ const AdminPage = () => {
 
   const addProduct = async () => {
     try {
+      setLoading(true);
       await addDoc(collection(fireDB, "products"), product);
       handleClose();
       toast.success("Prodcut add successfully");
       window.location.reload();
     } catch (error) {
       toast.error("Product add failed");
+      setLoading(false);
     }
   };
   const addHandler = () => {
@@ -99,10 +102,10 @@ const AdminPage = () => {
   };
 
   return (
-    <div>
+    <AdminLayout loading={loading}>
       <div className="d-flex justify-content-between py-3 px-3">
-        <h1>Product List</h1>
-        <button className="button-62" onClick={addHandler}>
+        <h1 className=" mt-1">Product List</h1>
+        <button className="button-62 mt-1" onClick={addHandler}>
           Add Product
         </button>
       </div>
@@ -211,7 +214,7 @@ const AdminPage = () => {
           )}
         </Modal.Footer>
       </Modal>
-    </div>
+    </AdminLayout>
   );
 };
 

@@ -1,11 +1,11 @@
 import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import fireDB from "../fireConfig";
-import { fireproducts } from "../firecommerce-products";
+
 import { useDispatch, useSelector } from "react-redux";
-import { FaCartPlus } from "react-icons/fa";
+
 import { toast } from "react-toastify";
 
 const Homepage = () => {

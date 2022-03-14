@@ -1,11 +1,10 @@
 import React from "react";
-import { useEffect } from "react";
 
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import fireDB from "../fireConfig";

@@ -1,7 +1,6 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { getDocs, collection } from "firebase/firestore";
-import fireDB from "./fireConfig";
+import { Navigate } from "react-router-dom";
+
 import "./App.css";
 import "./stylesheets/Layout.css";
 import "./stylesheets/Products.css";

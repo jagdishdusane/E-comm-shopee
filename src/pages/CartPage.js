@@ -7,12 +7,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { addDoc, collection } from "firebase/firestore";
 import fireDB from "../fireConfig";
 import { toast } from "react-toastify";
-import { async } from "@firebase/util";
 
 const CartPage = () => {
   const { cartItems } = useSelector((state) => state.cartReducer);
   const [totalAmount, settotalAmount] = useState(0);
-  const [discountAmount, setDiscountAmount] = useState(0);
+
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
@@ -92,7 +91,7 @@ const CartPage = () => {
 
     try {
       setLoading(true);
-      const result = await addDoc(collection(fireDB, "orders"), orderInfo);
+      await addDoc(collection(fireDB, "orders"), orderInfo);
       toast.success("Order placed successfully");
       setLoading(false);
       handleClose();
