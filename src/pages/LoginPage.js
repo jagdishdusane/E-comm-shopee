@@ -16,6 +16,9 @@ const LoginPage = () => {
   const auth = getAuth();
   const navigate = useNavigate();
 
+  const adminId = "admin@gmail.com";
+  const password = "admin@123";
+
   const adminLogin = () => {
     setIsAdmin(true);
     setIsUser(false);
@@ -59,23 +62,14 @@ const LoginPage = () => {
   }
 
   //admin Auth
-  async function admin() {
-    try {
-      setLoading(true);
-      const result = await signInWithEmailAndPassword(
-        auth,
-        adminEmailId,
-        adminPassword
-      );
+  function admin() {
+    setLoading(true);
 
-      setLoading(false);
-      toast.success("Login sccessful");
-      navigate(`/admin`);
-    } catch (error) {
-      toast.error("Login failed ");
-      setLoading(false);
+    if (adminId !== adminEmailId || password !== adminPassword) {
+      toast.error("Login failed");
+      return 0;
     }
-
+    navigate(`/admin`);
     setAdminEmailId("");
     setAdminPassword("");
   }
