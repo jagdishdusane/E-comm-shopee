@@ -1,5 +1,10 @@
 .form-control {
      box-shadow: none;
+
+}
+
+.form-text {
+     color: red;
 }
 
 .form-control:focus {
@@ -7,6 +12,18 @@
      box-shadow: none !important;
 
 }
+
+.invalid input {
+     border: 1px solid red;
+     background-color: #fddddd;
+}
+
+.invalid input:focus {
+     border: 1px solid #ff8800;
+     background-color: #fbe8d2;
+}
+
+
 
 input,
 textarea {
@@ -96,4 +113,12 @@ a {
 .button-62.disabled {
      opacity: 0.6 !important;
      cursor: not-allowed !important;
+}
+
+span .icon {
+     padding-top: 10px;
+}
+
+.error {
+     color: red;
 }

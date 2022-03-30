@@ -18,6 +18,8 @@ const SignupPage = () => {
   const [enterPassword, setEnterPassword] = useState("");
   const [enterConfirmPassword, setEnterConfirmPassword] = useState("");
 
+  const [emailError, setEmailError] = useState("");
+
   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   var letters = /^[A-z ]+$/;
   var strongRegex = new RegExp(
@@ -55,7 +57,12 @@ const SignupPage = () => {
       toast.success("Sign up sccessful");
       navigate(`/login`);
     } catch (error) {
-      toast.error("Sign up failed ");
+      switch (error.code) {
+        case "auth/email-already-in-use":
+        case "auth/invalid-email":
+          setEmailError(error.message);
+          break;
+      }
       setLoading(false);
     }
 
@@ -75,29 +82,47 @@ const SignupPage = () => {
     }
   }
 
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
+  const [mobileError, setMobileError] = useState(false);
+  const [passwordError, setpasswordError] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+
   const formHandler = () => {
-    if (!letters.test(enterFirstName) || !letters.test(enterLastName)) {
-      toast.error("Enter valid name");
+    if (!letters.test(enterFirstName)) {
+      setFirstNameError(true);
       return 0;
     }
+    setFirstNameError(false);
+
+    if (!letters.test(enterLastName)) {
+      setLastNameError(true);
+      return 0;
+    }
+    setLastNameError(false);
+
     if (enterMobileNo.length !== 10) {
-      toast.error("Enter valid mobile number");
+      setMobileError(true);
       return 0;
     }
-    if (!mailformat.test(enterEmailId)) {
+    setMobileError(false);
+
+    /* if (!mailformat.test(enterEmailId)) {
       toast.error("Enter valid email");
       return 0;
-    }
+    } */
     if (!strongRegex.test(enterPassword)) {
-      toast.error(
-        "Password must be eight characters or longer.Password must be combination of [a-z][A-Z][0-9][!@#$%^&*]"
-      );
+      setpasswordError(true);
+
       return 0;
     }
+    setpasswordError(false);
+
     if (enterPassword !== enterConfirmPassword) {
-      toast.error("Password and confrim password must be same");
+      setConfirmPasswordError(true);
       return 0;
     }
+    setConfirmPasswordError(false);
 
     signUp();
   };
@@ -120,72 +145,113 @@ const SignupPage = () => {
           <div className="signup-form">
             <h2>Sign Up</h2>
             <hr />
-            <input
-              type="text"
-              className="form-control"
-              placeholder="First Name"
-              value={enterFirstName}
-              onChange={(e) => setEnterFirstName(e.target.value)}
-            />
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Last Name"
-              value={enterLastName}
-              onChange={(e) => setEnterLasttName(e.target.value)}
-            />
-            <input
-              className="radio-btn"
-              type="radio"
-              name="radiogroup1"
-              value="male"
-              onChange={(e) => setEnterGender(e.target.value)}
-            />
-            <label htmlFor="rd1">Male</label>
-            <input
-              className="radio-btn"
-              type="radio"
-              name="radiogroup1"
-              value="female"
-              onChange={(e) => setEnterGender(e.target.value)}
-            />
-            <label htmlFor="rd2">Female</label>
-            <input
-              className="radio-btn"
-              type="radio"
-              name="radiogroup1"
-              value="other"
-              onChange={(e) => setEnterGender(e.target.value)}
-            />
-            <label htmlFor="rd3">Other</label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Mobile Number"
-              value={enterMobileNo}
-              onChange={(e) => setEnterMobileNo(e.target.value)}
-            />
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Email Id"
-              value={enterEmailId}
-              onChange={(e) => setEnterEmailId(e.target.value)}
-            />
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Password"
-              value={enterPassword}
-              onChange={(e) => setEnterPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Confirm password"
-              value={enterConfirmPassword}
-              onChange={(e) => setEnterConfirmPassword(e.target.value)}
-            />
+            <div className="mb-3">
+              <label className="">First Name</label>
+              <input
+                type="text"
+                className="form-control  mt-1"
+                placeholder="First Name"
+                value={enterFirstName}
+                onChange={(e) => setEnterFirstName(e.target.value)}
+              />
+              {firstNameError && (
+                <p className="error">First name must be valid</p>
+              )}
+            </div>
+            <div className="mb-3">
+              <label className="">Last Name</label>
+              <input
+                type="text"
+                className="form-control mt-1"
+                placeholder="Last Name"
+                value={enterLastName}
+                onChange={(e) => setEnterLasttName(e.target.value)}
+              />
+              {lastNameError && (
+                <p className="error">Last name must be valid</p>
+              )}
+            </div>
+            <div className="mb-3">
+              <input
+                className="radio-btn"
+                type="radio"
+                name="radiogroup1"
+                value="male"
+                onChange={(e) => setEnterGender(e.target.value)}
+              />
+              <label htmlFor="rd1">Male</label>
+              <input
+                className="radio-btn"
+                type="radio"
+                name="radiogroup1"
+                value="female"
+                onChange={(e) => setEnterGender(e.target.value)}
+              />
+              <label htmlFor="rd2">Female</label>
+              <input
+                className="radio-btn"
+                type="radio"
+                name="radiogroup1"
+                value="other"
+                onChange={(e) => setEnterGender(e.target.value)}
+              />
+              <label htmlFor="rd3">Other</label>
+            </div>
+            <div className="mb-3">
+              <label className="">Mobile Number</label>
+              <input
+                type="number"
+                className="form-control mt-1"
+                placeholder="Mobile Number"
+                value={enterMobileNo}
+                onChange={(e) => setEnterMobileNo(e.target.value)}
+              />
+              {mobileError && (
+                <p className="error">Mobile number must be 10 digit</p>
+              )}
+            </div>
+            <div className="mb-3">
+              <label className="">Email Id</label>
+              <input
+                type="email"
+                className="form-control mt-1"
+                placeholder="Email Id"
+                value={enterEmailId}
+                onChange={(e) => setEnterEmailId(e.target.value)}
+              />
+              <p className="error">{emailError}</p>
+            </div>
+            <div className="mb-3">
+              <label className="">Password</label>
+              <input
+                type="password"
+                className="form-control mt-1"
+                placeholder="Password"
+                value={enterPassword}
+                onChange={(e) => setEnterPassword(e.target.value)}
+              />
+              {passwordError && (
+                <p className="error">
+                  Password must be 8 characters or longer. And combination of
+                  uppercase,lowercase,special characters,numbers.
+                </p>
+              )}
+            </div>
+            <div className="mb-3">
+              <label className="">Confirm password</label>
+              <input
+                type="password"
+                className="form-control mt-1"
+                placeholder="Confirm password"
+                value={enterConfirmPassword}
+                onChange={(e) => setEnterConfirmPassword(e.target.value)}
+              />
+              {confirmPasswordError && (
+                <p className="error">
+                  Password and confirm Password must be same
+                </p>
+              )}
+            </div>
             <button
               className={`button-62 mt-3 ${!formIsValid ? "disabled" : ""}`}
               disabled={!formIsValid}

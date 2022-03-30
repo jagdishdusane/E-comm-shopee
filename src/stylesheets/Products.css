@@ -36,10 +36,12 @@
 }
 
 .total-amount {
-  background: linear-gradient(to bottom right, #FF9A5A, #FF9A5A);
+  background: linear-gradient(to bottom right, #ff9a5a42, #FF9A5A);
+
   border-radius: 20px;
   padding: 3px 10px;
   margin-right: 10px;
+  width: 25rem;
 }
 
 .total-amount:not([disabled]):hover {
@@ -49,4 +51,13 @@
 .order {
   background: aliceblue;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.discount-amount {
+  background: linear-gradient(to bottom right, #98269c, #FF9A5A);
+
+  border-radius: 20px;
+  padding: 3px 10px;
+  margin-right: 10px;
+  width: 25rem;
 }

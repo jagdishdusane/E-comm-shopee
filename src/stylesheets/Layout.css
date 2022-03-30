@@ -67,3 +67,16 @@
 }
 
 /* =============Loader */
+
+.adminPanel {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.adminBack {
+  background-image: radial-gradient(rgb(13 110 253 / 25%), transparent);
+}
+
+.btn-img {
+  margin-left: 10rem;
+  margin-top: 0.4rem;
+}
